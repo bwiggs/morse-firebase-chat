@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+.page-container {
+  margin-bottom: -120px;
+  min-height: 100%;
+}
+
+.page-container:after {
+  content: "";
+  display: block;
+}
+
+#new-message, .page-wrap:after {
+  height: 120px;
+}
+
+/*
+  Room View
+ */
+
+#room-view {
+  background: #fcfcfc;
+  /*position: fixed;*/
+  /*height: 100%;*/
+  width: 100%;
+  overflow: scroll;
+}
+
+#room-view .message {
+  padding: 5px 10px;
+}
+
+/*
+  New Message
+ */
+
+#new-message {
+  background: #dedede;
+  bottom: 0;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+  height: 120px;
+}
+
+#new-message textarea.message {
+  width: 100%;
+  height: 60%;
+  font-size: 14px;
+}
+
+#new-message .button.submit {
+  display: block;
+  width: 100%;
+  background: #4db6ac;
+  color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}

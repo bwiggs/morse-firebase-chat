@@ -3,11 +3,39 @@
   <head>
     <meta charset="utf-8">
     <title>Morse Chat Room</title>
-    <link rel="stylesheet" href="/css/vendor.css" media="screen" charset="utf-8">
+    <!-- <link rel="stylesheet" href="/css/vendor.css" media="screen" charset="utf-8"> -->
     <link rel="stylesheet" href="/css/app.css" media="screen" charset="utf-8">
   </head>
   <body>
+
+    <div class="page-container">
+      <!-- <div id="login-view">
+        <input class="username" type="text" minlength="3" required></input>
+
+        <button class="login-btn">Login</button>
+      </div> -->
+
+      <div id="room-view"></div>
+    </div>
+
+    <div id="new-message">
+      <textarea class="message"></textarea>
+      <button class="button submit" type="button" name="submit">Post</button>
+    </div>
+
+    <script id="message-tpl" type="text/x-handlebars-template">
+      <div class="message">{{time}} - {{message}}</div>
+    </script>
+
     <script src="/js/vendor.js" charset="utf-8"></script>
     <script src="/js/app.js" charset="utf-8"></script>
+    <script>
+      firebase.initializeApp({
+        apiKey: "AIzaSyAEIH9NRbxFHSHn7O9Suq8ndh1mShowveU",
+        authDomain: "morse-2337b.firebaseapp.com",
+        databaseURL: "https://morse-2337b.firebaseio.com",
+        storageBucket: "morse-2337b.appspot.com",
+      });
+    </script>
   </body>
 </html>
