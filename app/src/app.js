@@ -39,7 +39,11 @@ App.SubmitView = Backbone.View.extend({
       message: this.$message.val(),
     });
 
-    msg.save();
+    if(msg.isValid()) {
+      msg.save();
+    } else {
+      console.warn(msg.validationError);
+    }
 
     // clear the input
     this.$message.val('')
@@ -89,6 +93,10 @@ App.Message = Backbone.Model.extend({
   save: function() {
     this.attributes.time = Date.now();
     firebase.database().ref('/messages').push(this.attributes);
+  },
+
+  validate: function(attrs, options) {
+    if(!attrs.message) { return 'must provide a message'; }
   }
 });
 
