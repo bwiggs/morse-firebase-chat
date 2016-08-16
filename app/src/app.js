@@ -1,21 +1,28 @@
-$(function() {
-  var chatHistory = new APP.MessageHistory();
-  var chatSubmit = new APP.SubmitView();
-  var roomView = new APP.RoomView({collection: chatHistory});
+// wait for dom to load then run our app.
+$(App.init)
 
-  firebase.database().ref('/messages').on('child_added', function(child) {
-    var msg = child.val();
-    chatHistory.add(msg);
-  });
-})
+//==============================================================================
+// App Namespace
+//==============================================================================
 
-var APP = {};
+var App = {
+  init: function() {
+    var chatHistory = new App.MessageHistory();
+    var chatSubmit = new App.SubmitView();
+    var roomView = new App.RoomView({collection: chatHistory});
+
+    firebase.database().ref('/messages').on('child_added', function(child) {
+      var msg = child.val();
+      chatHistory.add(msg);
+    });
+  }
+};
 
 //==============================================================================
 // Views
 //==============================================================================
 
-APP.SubmitView = Backbone.View.extend({
+App.SubmitView = Backbone.View.extend({
 
   el: '#new-message',
 
@@ -28,7 +35,7 @@ APP.SubmitView = Backbone.View.extend({
   },
 
   submit: function() {
-    var msg = new APP.Message({
+    var msg = new App.Message({
       message: this.$message.val(),
     });
 
@@ -39,7 +46,7 @@ APP.SubmitView = Backbone.View.extend({
   }
 });
 
-APP.RoomView = Backbone.View.extend({
+App.RoomView = Backbone.View.extend({
 
   // the element to bind the view to, this uses css selector syntax
   el: '#room-view',
@@ -78,13 +85,13 @@ APP.RoomView = Backbone.View.extend({
 // Models & Collections
 //==============================================================================
 
-APP.Message = Backbone.Model.extend({
+App.Message = Backbone.Model.extend({
   save: function() {
     this.attributes.time = Date.now();
     firebase.database().ref('/messages').push(this.attributes);
   }
 });
 
-APP.MessageHistory = Backbone.Collection.extend({
-  model: APP.Message
+App.MessageHistory = Backbone.Collection.extend({
+  model: App.Message
 });
